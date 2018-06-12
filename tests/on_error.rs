@@ -4,7 +4,7 @@ extern crate futures;
 use backoff::on_error;
 
 #[on_error(max_tries = "5")]
-fn dummy() -> impl futures::Future<Item = u32, Error = u32> {
+fn dummy() -> futures::future::FutureResult<u32, u32> {
     futures::future::ok(5)
 }
 

@@ -92,8 +92,8 @@ fn check_fn(func: &syn::ItemFn) -> proc_macro2::TokenStream {
                     .error("functions returning impl Trait not allowed")
                     .emit();
             }
-            let assert_future = quote_spanned! {ty_span =>
-                struct _AssertFuture where #ty: ::backoff::Future;
+            let assert_future = quote_spanned! {ty_span=>
+                struct _AssertFuture where #ret_ty: ::backoff::Future;
             };
             assert_future
         }
