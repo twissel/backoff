@@ -1,0 +1,9 @@
+[package]
+name = "backoff"
+version = "0.1.0"
+authors = ["twissel <twissel@gmail.com>"]
+
+
+[dependencies]
+backoff-macro = { path = "backoff-macro", version = "0.1" }
+futures = "0.2.1"
