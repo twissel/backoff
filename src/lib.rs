@@ -28,7 +28,7 @@ where
     Fut: Future,
 {
     state: BackoffState<Fut>,
-    func: Box<Fn() -> Fut>,
+    func: Box<FnMut() -> Fut>,
     max_tries: Option<u64>,
     max_time: Option<Duration>,
 }
@@ -37,7 +37,7 @@ impl<Fut> Backoff<Fut>
 where
     Fut: Future,
 {
-    pub fn new<F: Fn() -> Fut + 'static>(
+    pub fn new<F: FnMut() -> Fut + 'static>(
         max_tries: Option<u64>,
         max_time: Option<u64>,
         func: F,
@@ -89,7 +89,6 @@ where
                             return Ok(Async::Pending);
                         }
                         Err(e) => {
-                            println!("future failed");
                             processing.tried += 1;
                             if let Some(max_time) = self.max_time {
                                 let elapsed = processing.started.elapsed();
